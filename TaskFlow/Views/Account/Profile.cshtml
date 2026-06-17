@@ -1,0 +1,39 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Welcome @Model.Username</h2>
+
+<p><strong>Full Name:</strong> @Model.FullName</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Member since:</strong> @Model.CreatedAt.ToShortDateString()</p>
+
+<hr />
+
+<h3>Change Password</h3>
+
+@if (TempData["Success"] != null)
+{
+    <p style="color:green;">@TempData["Success"]</p>
+}
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;">@TempData["Error"]</p>
+}
+
+<form method="post" asp-action="ChangePassword">
+    <div>
+        <label>Current Password:</label>
+        <input type="password" name="currentPassword" required readonly onfocus="this.removeAttribute('readonly');" autocomplete="off" required />
+    </div>
+    <div>
+        <label>New Password:</label>
+        <input type="password" name="newPassword" required />
+    </div>
+    <button type="submit">Change Password</button>
+</form>
+
+<p><a href="/Task/Index">Back to Tasks</a></p>
+<p><a href="/Account/Logout">Logout</a></p>
